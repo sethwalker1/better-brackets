@@ -8,8 +8,9 @@
  */
 
 // tslint:disable-next-line: no-reference
-/// <reference path="../lib/jquery.d.ts" />
+/// <reference path="../lib/bbracket.d.ts" />
 "use strict";
+
 var EntryState;
 (function(EntryState) {
     EntryState["EMPTY_BYE"] = "empty-bye";
