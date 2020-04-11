@@ -274,7 +274,7 @@ var EntryState;
             if (teamId === undefined) {
                 return;
             }
-            const track = trackHighlighter(parseInt(teamId, 10), null, container);
+            const track = trackHighlighter(parseInt(teamId), null, container);
             track.highlight();
             $(this).mouseout(function() {
                 track.deHighlight();
@@ -1008,7 +1008,7 @@ var EntryState;
 
                     function editor() {
                         span.unbind();
-                        const initialScore = !isNumber(team.score) ? "0" : span.text();
+                        const initialScore = !isNumber(team.score.val) ? "0" : span.text();
                         const input = $('<input type="text">');
                         input.val(initialScore);
                         span.empty().append(input);
@@ -1023,7 +1023,7 @@ var EntryState;
                             if (key === 9 || key === 13 || key === 27) {
                                 e.preventDefault();
                                 $(this).blur();
-                                if (key === 27) {
+                                if (key === 27 || key === 13) {
                                     return;
                                 }
                                 const next = topCon.find("div.score[data-resultid=result-" + (rId + 1) + "]");
@@ -1512,10 +1512,10 @@ var EntryState;
     }
 
     function defaultEvaluateScore(val, previousVal) {
-        if ((!val || !isNumber(val)) && !isNumber(previousVal)) {
+        if (!val || !isNumber(val)) { // && !isNumber(previousVal)) {
             return 0;
         } else if (isNumber(val)) {
-            return parseInt(val, 10);
+            return parseInt(val);
         }
         return null;
     }
